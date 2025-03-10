@@ -35,11 +35,6 @@ const Posts = dbHandler.define("posts", {
     "content":{
         type: DataTypes.STRING,
         allowNull: false
-    },
-    "likes":{
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: false
     }
 },{
     timestamps: false
@@ -62,10 +57,6 @@ const Comments = dbHandler.define("comments", {
     },
     "content":{
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    "likes":{
-        type: DataTypes.INTEGER,
         allowNull: false
     }
 },{
