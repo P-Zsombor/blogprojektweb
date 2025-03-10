@@ -109,23 +109,6 @@ server.delete("/deletepost", Auth(), async (req, res) => {
     res.end()
 })
 
-server.put("/addliketopost", Auth(), async (req, res) => {
-    const post = await dbHandler.tables.Posts.findOne({
-        where:{
-            postId: req.body.postId
-        }
-    })
-    if(post){
-        post.likes += 1
-        await post.save()
-        res.json({"message":"Like added successfully"})
-    }
-    else{
-        res.status(400).json({"message":"Post not found"})
-    }
-	res.end()
-})
-
 server.post("/addcomment", Auth(), async (req, res) => {
     const post = await dbHandler.tables.Posts.findOne({
         where:{
@@ -154,23 +137,6 @@ server.delete("/deletecomment", Auth(), async (req, res) => {
     if(comment){
         await comment.destroy()
         res.json({"message":"Comment deleted successfully"})
-    }
-    else{
-        res.status(400).json({"message":"Comment not found"})
-    }
-	res.end()
-})
-
-server.put("/addliketocomment", Auth(), async (req, res) => {
-    const comment = await dbHandler.tables.Comments.findOne({
-        where:{
-            commentId: req.body.commentId
-        }
-    })
-    if(comment){
-        comment.likes += 1
-        await comment.save()
-        res.json({"message":"Like added successfully"})
     }
     else{
         res.status(400).json({"message":"Comment not found"})
